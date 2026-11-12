@@ -119,31 +119,31 @@
 @endphp
 
 <!-- Üst Başlık ve Geri Dönüş -->
-<div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-    <div class="flex items-center gap-3">
-        <a href="{{ route('patients.index') }}" class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 transition">
+<div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-3 sm:gap-4 mb-5 sm:mb-6">
+    <div class="flex items-center gap-3 min-w-0">
+        <a href="{{ route('patients.index') }}" class="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-white border border-slate-200 text-slate-600 hover:bg-slate-100 transition shrink-0">
             ←
         </a>
-        <div>
-            <h1 class="text-2xl font-bold text-slate-900">{{ $patient->full_name }}</h1>
-            <p class="text-xs text-slate-500">
+        <div class="min-w-0">
+            <h1 class="text-xl sm:text-2xl font-bold text-slate-900 truncate">{{ $patient->full_name }}</h1>
+            <p class="text-xs text-slate-500 truncate">
                 Hasta #{{ $patient->id }}
                 @if($patient->tc_no) • TC: {{ $patient->tc_no }} @endif
                 • Tel: {{ $patient->phone }}
             </p>
         </div>
     </div>
-    <div class="flex items-center gap-2 text-xs">
-        <span class="px-3 py-1.5 rounded-lg bg-yellow-100 text-yellow-800 font-semibold">
+    <div class="grid grid-cols-2 sm:flex sm:flex-wrap items-center gap-2 text-xs">
+        <span class="px-3 py-1.5 rounded-lg bg-yellow-100 text-yellow-800 font-semibold text-center">
             Sağlam: <span id="count-healthy">0</span>
         </span>
-        <span class="px-3 py-1.5 rounded-lg bg-red-100 text-red-800 font-semibold">
+        <span class="px-3 py-1.5 rounded-lg bg-red-100 text-red-800 font-semibold text-center">
             İşlem Yapıldı: <span id="count-treated">0</span>
         </span>
-        <span class="px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-semibold">
+        <span class="px-3 py-1.5 rounded-lg bg-blue-100 text-blue-800 font-semibold text-center">
             Planlanan: <span id="count-planned">0</span>
         </span>
-        <span class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 font-semibold">
+        <span class="px-3 py-1.5 rounded-lg bg-slate-200 text-slate-700 font-semibold text-center">
             Eksik: <span id="count-missing">0</span>
         </span>
     </div>
@@ -197,23 +197,23 @@
                 </div>
             </div>
             <dl class="space-y-2.5 text-sm">
-                <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500">Telefon</dt>
-                    <dd class="font-medium text-slate-900">{{ $patient->phone }}</dd>
+                <div class="flex justify-between gap-3">
+                    <dt class="text-slate-500 shrink-0">Telefon</dt>
+                    <dd class="font-medium text-slate-900 min-w-0 text-right break-all">{{ $patient->phone }}</dd>
                 </div>
-                <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500">TC Kimlik No</dt>
-                    <dd class="font-medium text-slate-900">{{ $patient->tc_no ?: '—' }}</dd>
+                <div class="flex justify-between gap-3">
+                    <dt class="text-slate-500 shrink-0">TC Kimlik No</dt>
+                    <dd class="font-medium text-slate-900 min-w-0 text-right">{{ $patient->tc_no ?: '—' }}</dd>
                 </div>
-                <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500">Doğum Tarihi</dt>
-                    <dd class="font-medium text-slate-900">
+                <div class="flex justify-between gap-3">
+                    <dt class="text-slate-500 shrink-0">Doğum Tarihi</dt>
+                    <dd class="font-medium text-slate-900 min-w-0 text-right">
                         {{ $patient->birth_date ? $patient->birth_date->format('d.m.Y') . ' (' . $patient->birth_date->age . ' yaş)' : '—' }}
                     </dd>
                 </div>
-                <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500">Cinsiyet</dt>
-                    <dd class="font-medium text-slate-900">
+                <div class="flex justify-between gap-3">
+                    <dt class="text-slate-500 shrink-0">Cinsiyet</dt>
+                    <dd class="font-medium text-slate-900 min-w-0 text-right">
                         {{ match($patient->gender) {
                             'male' => 'Erkek',
                             'female' => 'Kadın',
@@ -222,9 +222,9 @@
                         } }}
                     </dd>
                 </div>
-                <div class="flex justify-between gap-2">
-                    <dt class="text-slate-500">E-posta</dt>
-                    <dd class="font-medium text-slate-900">{{ $patient->email ?: '—' }}</dd>
+                <div class="flex justify-between gap-3">
+                    <dt class="text-slate-500 shrink-0">E-posta</dt>
+                    <dd class="font-medium text-slate-900 min-w-0 text-right break-all">{{ $patient->email ?: '—' }}</dd>
                 </div>
             </dl>
 
@@ -311,10 +311,10 @@
     </div>
 
     <!-- SAĞ / MERKEZ ALAN: İnteraktif SVG Odontogram -->
-    <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6">
+    <div class="lg:col-span-8 bg-white rounded-2xl border border-slate-200 shadow-sm p-3.5 sm:p-6">
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pb-4 border-b border-slate-100">
             <div>
-                <h2 class="text-lg font-bold text-slate-900">İnteraktif Diş Şeması (FDI Odontogram)</h2>
+                <h2 class="text-base sm:text-lg font-bold text-slate-900">İnteraktif Diş Şeması (FDI Odontogram)</h2>
                 <p class="text-xs text-slate-500">Durumunu güncellemek istediğiniz dişin üzerine tıklayın.</p>
             </div>
 
@@ -330,10 +330,11 @@
         </div>
 
         <!-- SVG Odontogram -->
-        <div class="mt-4 flex justify-center">
+        <div class="mt-3 sm:mt-4 flex justify-center">
             <svg
                 id="odontogram-svg"
                 viewBox="0 0 600 620"
+                style="touch-action: manipulation;"
                 class="w-full max-w-[560px] h-auto select-none"
                 role="img"
                 aria-label="FDI 11-48 İnteraktif Diş Şeması"
@@ -467,13 +468,43 @@
             </div>
         </div>
 
-        <!-- Finansal Hareketler Tablosu (Cari Ekstre) -->
+        <!-- Finansal Hareketler (Cari Ekstre) -->
         <div class="border border-slate-200 rounded-xl overflow-hidden">
-            <div class="px-5 py-3.5 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
+            <div class="px-4 sm:px-5 py-3.5 bg-slate-50/80 border-b border-slate-200 flex items-center justify-between">
                 <h3 class="text-sm font-bold text-slate-800">Finansal Hareketler (Cari Ekstre)</h3>
                 <span id="finance-ledger-count" class="text-xs font-medium text-slate-500">{{ count($ledger) }} Hareket</span>
             </div>
-            <div class="overflow-x-auto">
+
+            <!-- Mobil Kart Listesi (< md) -->
+            <div id="finance-ledger-mobile" class="md:hidden divide-y divide-slate-100">
+                @forelse ($ledger as $row)
+                    @php $isPayment = $row['type'] === 'payment'; @endphp
+                    <div class="p-4 space-y-1.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0 {{ $isPayment ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700' }}">
+                                    {{ $row['type_label'] }}
+                                </span>
+                                <span class="text-xs text-slate-500 truncate">{{ $row['date_formatted'] }}</span>
+                            </div>
+                            <span class="text-sm font-bold shrink-0 {{ $isPayment ? 'text-emerald-600' : 'text-rose-600' }}">
+                                {{ $isPayment ? '+' : '-' }}{{ number_format($row['amount'], 2, ',', '.') }} ₺
+                            </span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-900">{{ $row['title'] }}</div>
+                        @if (!empty($row['notes']))
+                            <div class="text-xs text-slate-500">{{ $row['notes'] }}</div>
+                        @endif
+                    </div>
+                @empty
+                    <div class="px-4 py-8 text-center text-xs text-slate-400">
+                        Henüz finansal hareket kaydı bulunmuyor.
+                    </div>
+                @endforelse
+            </div>
+
+            <!-- Masaüstü Tablo (md+) -->
+            <div class="hidden md:block overflow-x-auto">
                 <table class="w-full text-left border-collapse">
                     <thead>
                         <tr class="border-b border-slate-100 text-[11px] font-semibold uppercase tracking-wider text-slate-500 bg-white">
@@ -515,17 +546,17 @@
 </div>
 
 <!-- Tahsilat Al Modalı -->
-<div id="payment-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-            <div>
-                <h3 class="text-lg font-bold text-slate-900">Tahsilat Al</h3>
-                <p class="text-xs text-slate-500">{{ $patient->full_name }} • Kalan Bakiye: <span id="modal-current-balance" class="font-semibold text-slate-800">{{ number_format($financeSummary['balance'], 2, ',', '.') }} ₺</span></p>
+<div id="payment-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-2xl sm:rounded-2xl max-w-md w-full max-h-[92dvh] flex flex-col shadow-xl border border-slate-200 overflow-hidden safe-bottom">
+        <div class="px-5 sm:px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+            <div class="min-w-0 pr-2">
+                <h3 class="text-base sm:text-lg font-bold text-slate-900">Tahsilat Al</h3>
+                <p class="text-xs text-slate-500 truncate">{{ $patient->full_name }} • Kalan Bakiye: <span id="modal-current-balance" class="font-semibold text-slate-800">{{ number_format($financeSummary['balance'], 2, ',', '.') }} ₺</span></p>
             </div>
-            <button type="button" id="close-payment-modal" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+            <button type="button" id="close-payment-modal" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 text-2xl leading-none shrink-0">&times;</button>
         </div>
 
-        <form id="payment-form" class="p-6 space-y-4">
+        <form id="payment-form" class="p-5 sm:p-6 space-y-4 overflow-y-auto">
             <div>
                 <label for="payment-amount" class="block text-xs font-semibold text-slate-700 mb-1">Ödenecek Tutar (₺) *</label>
                 <input
@@ -595,17 +626,17 @@
 </div>
 
 <!-- Diş Düzenleme Modalı -->
-<div id="tooth-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-    <div class="bg-white rounded-2xl max-w-md w-full shadow-xl border border-slate-200 overflow-hidden">
-        <div class="px-6 py-4 border-b border-slate-100 flex items-center justify-between">
-            <div>
-                <h3 id="modal-tooth-title" class="text-lg font-bold text-slate-900">Diş #16 İşlem Paneli</h3>
-                <p id="modal-tooth-subtitle" class="text-xs text-slate-500">Üst Sağ 1. Büyük Azı</p>
+<div id="tooth-modal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-xs flex items-end sm:items-center justify-center p-0 sm:p-4">
+    <div class="bg-white rounded-t-2xl sm:rounded-2xl max-w-md w-full max-h-[92dvh] flex flex-col shadow-xl border border-slate-200 overflow-hidden safe-bottom">
+        <div class="px-5 sm:px-6 py-4 border-b border-slate-100 flex items-center justify-between shrink-0">
+            <div class="min-w-0 pr-2">
+                <h3 id="modal-tooth-title" class="text-base sm:text-lg font-bold text-slate-900">Diş #16 İşlem Paneli</h3>
+                <p id="modal-tooth-subtitle" class="text-xs text-slate-500 truncate">Üst Sağ 1. Büyük Azı</p>
             </div>
-            <button type="button" id="close-tooth-modal" class="text-slate-400 hover:text-slate-600 text-2xl leading-none">&times;</button>
+            <button type="button" id="close-tooth-modal" class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-100 text-2xl leading-none shrink-0">&times;</button>
         </div>
 
-        <form id="tooth-form" class="p-6 space-y-4">
+        <form id="tooth-form" class="p-5 sm:p-6 space-y-4 overflow-y-auto">
             <input type="hidden" id="form-tooth-number" name="tooth_number">
 
             <!-- Durum Seçimi -->
@@ -849,6 +880,7 @@
         if (!Array.isArray(ledger)) return;
         document.getElementById('finance-ledger-count').textContent = `${ledger.length} Hareket`;
         const tbody = document.getElementById('finance-ledger-body');
+        const mobileList = document.getElementById('finance-ledger-mobile');
 
         if (!ledger.length) {
             tbody.innerHTML = `
@@ -857,6 +889,9 @@
                         Henüz finansal hareket kaydı bulunmuyor.
                     </td>
                 </tr>`;
+            if (mobileList) {
+                mobileList.innerHTML = `<div class="px-4 py-8 text-center text-xs text-slate-400">Henüz finansal hareket kaydı bulunmuyor.</div>`;
+            }
             return;
         }
 
@@ -877,6 +912,28 @@
                     </td>
                 </tr>`;
         }).join('');
+
+        if (mobileList) {
+            mobileList.innerHTML = ledger.map((row) => {
+                const isPayment = row.type === 'payment';
+                return `
+                    <div class="p-4 space-y-1.5">
+                        <div class="flex items-center justify-between gap-2">
+                            <div class="flex items-center gap-2 min-w-0">
+                                <span class="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold shrink-0 ${isPayment ? 'bg-emerald-50 text-emerald-700' : 'bg-rose-50 text-rose-700'}">
+                                    ${escapeHtml(row.type_label)}
+                                </span>
+                                <span class="text-xs text-slate-500 truncate">${escapeHtml(row.date_formatted)}</span>
+                            </div>
+                            <span class="text-sm font-bold shrink-0 ${isPayment ? 'text-emerald-600' : 'text-rose-600'}">
+                                ${isPayment ? '+' : '-'}${formatCurrency(row.amount)}
+                            </span>
+                        </div>
+                        <div class="text-sm font-medium text-slate-900">${escapeHtml(row.title)}</div>
+                        ${row.notes ? `<div class="text-xs text-slate-500">${escapeHtml(row.notes)}</div>` : ''}
+                    </div>`;
+            }).join('');
+        }
     };
 
     const updateCounters = () => {
